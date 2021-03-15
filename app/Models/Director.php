@@ -10,4 +10,9 @@ class Director extends Model
     use HasFactory;
     protected $table ="directores";
 
+    //un director una o muchas peliculas
+    public function peliculas(){
+        return $this->hasMany('\App\Models\Pelicula');
+    }
+
 }
