@@ -3,6 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pelicula;
+use App\Models\Genero;
+use App\Models\Actor;
+use App\Models\Director;
+use Illuminate\Support\Facades\Storage; //eliminar imagenes del servidor
+
+
+
+use Illuminate\Support\Arr;
+
+
 
 class PeliculasController extends Controller
 {
@@ -13,7 +24,16 @@ class PeliculasController extends Controller
      */
     public function index()
     {
-        //
+        //obtengo todas las peliculas
+       $pelicula = Pelicula::all();
+      /*
+       $actor = Actor::first();
+
+       $actor_pelicula=$actor->peliculas->first()->pivot;
+*/
+
+
+       return view("peliculas.index", ["peliculas"=>$pelicula]);
     }
 
     /**
@@ -23,7 +43,11 @@ class PeliculasController extends Controller
      */
     public function create()
     {
-        //
+       $directores = Director::all();
+       $actores= Actor::all();
+       $generos= Genero::all();
+      
+       return view("peliculas.create",["directores"=>$directores,"actores"=>$actores,"generos"=>$generos]);
     }
 
     /**
@@ -34,7 +58,56 @@ class PeliculasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validar campos del formulario
+
+        $this->validate($request,[
+            'titulo'=>'required',
+            'anio'=>'required',
+            'director'=>'required',
+            'genero'=>'required',
+            'actores'=>'required',
+            "portada" =>'required|image|max:1999'
+        ]);
+        //proceso la imagen y la guardo en el servidor
+        if($request->hasFile('portada')){ //verifico si subio o no un archivo
+
+            //proceso y guardo la imagen
+            $nombreOriginal=  $request->file('portada')->getClientOriginalName(); //recupero el nombre del archivo que subio el usuario
+            
+            //separar nombre de archivo de extension
+            $nombre = pathinfo($nombreOriginal, PATHINFO_FILENAME);
+
+            //extension del archivo
+            $extension = $request->file('portada')->getClientOriginalExtension();
+
+            $nombre_a_guardar = $nombre ."_".time().".".$extension; //nombre hora extension 
+
+            $request->file('portada')->storeAs('public/portadas',$nombre_a_guardar); //guardo la imagen
+
+        }else{
+            //guardo una imagen de muestra(noimage.png)
+
+            $nombre_a_guardar ="noimage.png";
+        }
+
+
+        $pelicula = new Pelicula();
+        $pelicula->titulo = $request->input('titulo');
+        $pelicula->anio = $request->input('anio');
+        $pelicula->genero_id = $request->input('genero');
+        $pelicula->director_id = $request->input('director');
+        //$pelicula->actores_principales = $request->input('actores');
+        $pelicula->imagen_portada = $nombre_a_guardar;
+       
+        //seteo el id del usuario que está logueado creando la nueva pelicula
+        $pelicula->user_id = auth()->user()->id; //pido el id del usuario logueado que esta creando la pelicula  
+        
+        $pelicula->save();
+        $pelicula->actores()->sync($request->input('actores'));
+
+
+       return redirect("/peliculas")->with("success", "Pelicula Cargada Exitosamente");
+
     }
 
     /**

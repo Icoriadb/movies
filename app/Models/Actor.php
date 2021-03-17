@@ -12,7 +12,7 @@ class Actor extends Model
 
     //un actor una o muchas peliculas
     public function peliculas(){
-        return $this->belongsToMany('\App\Models\Pelicula')->withTimestamps();
+        return $this->belongsToMany('\App\Models\Pelicula', 'actor_pelicula', 'actor_id', 'pelicula_id')->withTimestamps();
     }
 
 }

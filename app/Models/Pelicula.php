@@ -17,7 +17,7 @@ class Pelicula extends Model
 
     //una pelicula muchos actores
     public function actores(){
-        return $this->belongsToMany('\App\Models\Director');
+        return $this->belongsToMany('\App\Models\Actor', 'actor_pelicula', 'pelicula_id', 'actor_id')->withTimestamps();
     }
 
     //una pelicula un usuario
