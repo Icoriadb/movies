@@ -16,17 +16,15 @@ class CreatePeliculasTable extends Migration
         Schema::create('peliculas', function (Blueprint $table) {
             $table->id();
             $table->string("titulo");
-            $table->date("anio");
+            $table->integer("anio");
             $table->string("imagen_portada");
             $table->unsignedBigInteger("director_id");
-            $table->unsignedBigInteger("actor_id");
             $table->unsignedBigInteger("genero_id");
             $table->unsignedBigInteger("user_id");
             $table->timestamps();
 
             //claves foraneas
             $table->foreign('director_id')->references('id')->on('directores');
-            $table->foreign('actor_id')->references('id')->on('actores');
             $table->foreign('genero_id')->references('id')->on('generos');
             $table->foreign('user_id')->references('id')->on('users');
         });
