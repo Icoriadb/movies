@@ -26,14 +26,12 @@ class PeliculasController extends Controller
     {
         //obtengo todas las peliculas
        $pelicula = Pelicula::all();
-      /*
-       $actor = Actor::first();
-
-       $actor_pelicula=$actor->peliculas->first()->pivot;
-*/
 
 
-       return view("peliculas.index", ["peliculas"=>$pelicula]);
+
+      //return  $actor->peliculas->first($pelicula)->pivot;
+
+     return view("peliculas.index", ["peliculas"=>$pelicula]);
     }
 
     /**
@@ -118,7 +116,10 @@ class PeliculasController extends Controller
      */
     public function show($id)
     {
-        //
+      //muestro la pelicula pedida
+      $pelicula = Pelicula::findOrFail($id); //obtengo la pelicula y muestro un error 404 si no la encuentra
+
+      return view("peliculas.show", ["peliculas"=>$pelicula]);
     }
 
     /**
