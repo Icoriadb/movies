@@ -153,6 +153,16 @@ class PeliculasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pelicula = Pelicula::find($id);
+        if(auth()->user()->id !== $pelicula->user_id ) //si el usuario logueado es distinto del usuario de la pelicula
+            return redirect('/peliculas')->with("error","Acceso no autorizado");
+        else
+        
+      //elimino imagen del servidor
+       Storage::delete("/public/portadas/$pelicula->imagen_portada");
+ 
+       $pelicula->delete();
+ 
+        return redirect("/peliculas")->with("success", "Pelicula Eliminada Exitosamente");
     }
 }
