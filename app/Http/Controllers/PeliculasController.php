@@ -130,7 +130,19 @@ class PeliculasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pelicula =Pelicula::findOrFail($id);
+        $directores = Director::all();
+        $actores= Actor::all();
+        $generos= Genero::all();
+        
+        if (auth()->user()->id !== $pelicula->user_id) {
+            return redirect('/peliculas')->with('error', 'La pelicula solo puede ser editada por el creador ');
+        } else {
+            return view('peliculas.edit', ['pelicula' => $pelicula, 'actores' =>$actores, 'directores' => $directores, 'generos' => $generos]);
+        }
+
+       
+       return view("peliculas.edit",["directores"=>$directores,"actores"=>$actores,"generos"=>$generos]);
     }
 
     /**
@@ -142,7 +154,54 @@ class PeliculasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $this->validate($request,[
+            'titulo'=>'required',
+            'anio'=>'required',
+            'director'=>'required',
+            'genero'=>'required',
+            "portada" =>'image|max:1999'
+        ]);
+        //proceso la imagen y la guardo en el servidor
+        if($request->hasFile('portada')){ //verifico si subio o no un archivo
+
+            //proceso y guardo la imagen
+            $nombreOriginal=  $request->file('portada')->getClientOriginalName(); //recupero el nombre del archivo que subio el usuario
+            
+            //separar nombre de archivo de extension
+            $nombre = pathinfo($nombreOriginal, PATHINFO_FILENAME);
+
+            //extension del archivo
+            $extension = $request->file('portada')->getClientOriginalExtension();
+
+            $nombre_a_guardar = $nombre ."_".time().".".$extension; //nombre hora extension 
+
+            $request->file('portada')->storeAs('public/portadas',$nombre_a_guardar); //guardo la imagen
+        
+        }
+
+        $pelicula = Pelicula::findOrFail($id);
+        $pelicula->titulo = $request->input('titulo');
+        $pelicula->anio = $request->input('anio');
+        $pelicula->genero_id = $request->input('genero');
+        $pelicula->director_id = $request->input('director');
+
+        if($request->hasFile('portada')){
+            $pelicula->imagen_portada = $nombre_a_guardar;
+        }
+        //seteo el id del usuario que está logueado creando la nueva pelicula
+        $pelicula->user_id = auth()->user()->id; //pido el id del usuario logueado que esta creando la pelicula  
+       
+        //si no modifica los actores 
+        $actores = Actor::find($request->actores);
+         if($actores != null){
+            $pelicula->actores()->sync( $actores);
+         }
+
+        $pelicula->save();
+
+        return redirect("/peliculas")->with("success", "Pelicula Editada Exitosamente");
+
     }
 
     /**
