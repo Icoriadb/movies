@@ -30,12 +30,10 @@ class PeliculasController extends Controller
 
     public function index()
     {
-        //obtengo todas las peliculas
-       $pelicula = Pelicula::all();
-
-      //return  $actor->peliculas->first($pelicula)->pivot;
-
-     return view("peliculas.index", ["peliculas"=>$pelicula]);
+    //obtengo todas las peliculas
+    $pelicula = Pelicula::all();
+    
+    return view("peliculas.index", ["peliculas"=>$pelicula]);
     }
 
     /**
@@ -190,7 +188,9 @@ class PeliculasController extends Controller
         $pelicula->genero_id = $request->input('genero');
         $pelicula->director_id = $request->input('director');
 
+        //si cambio la portada, elimino la anterior y cargo la nueva
         if($request->hasFile('portada')){
+            Storage::delete("/public/portadas/$pelicula->imagen_portada");
             $pelicula->imagen_portada = $nombre_a_guardar;
         }
         //seteo el id del usuario que está logueado creando la nueva pelicula
@@ -201,11 +201,9 @@ class PeliculasController extends Controller
          if($actores != null){
             $pelicula->actores()->sync( $actores);
          }
-
         $pelicula->save();
 
         return redirect("/peliculas")->with("success", "Pelicula Editada Exitosamente");
-
     }
 
     /**
