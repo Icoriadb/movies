@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Actor;
+
 
 class ActoresController extends Controller
 {
@@ -13,7 +15,9 @@ class ActoresController extends Controller
      */
     public function index()
     {
-        //
+        $actores= Actor::all();
+
+        return view("actores.index",["actores"=>$actores]);
     }
 
     /**
@@ -23,7 +27,8 @@ class ActoresController extends Controller
      */
     public function create()
     {
-        //
+        return redirect('actores')->with('error', 'No se pueden crear nuevos actores');
+
     }
 
     /**
@@ -34,7 +39,8 @@ class ActoresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect('actores')->with('error', 'No se pueden crear nuevos actores');
+
     }
 
     /**
@@ -45,7 +51,8 @@ class ActoresController extends Controller
      */
     public function show($id)
     {
-        //
+        $actor = Actor::find($id);
+        return view("actores.show",["actor"=>$actor]);
     }
 
     /**
@@ -56,7 +63,8 @@ class ActoresController extends Controller
      */
     public function edit($id)
     {
-        //
+        return redirect('actores')->with('error', 'No se pueden editar los actores');
+
     }
 
     /**
@@ -68,7 +76,8 @@ class ActoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return redirect('actores')->with('error', 'No se pueden editar los actores');
+
     }
 
     /**
@@ -79,6 +88,7 @@ class ActoresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return redirect('actores')->with('error', 'No se pueden eliminar los actores');
+
     }
 }
