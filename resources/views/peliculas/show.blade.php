@@ -15,10 +15,13 @@
         <div class="card-body">
        
         <h5 class="card-title"><a href="/peliculas/{{$peliculas->id}}">{{$peliculas->titulo}}</a></h5>
-            <p class="card-text">Director: {{$peliculas->director->nombre." ".$peliculas->director->apellido}}</p>
+            <p class="card-text"> Director:<a href="/directores/{{$peliculas->director->id}}"> {{$peliculas->director->nombre." ".$peliculas->director->apellido}}</a></p>
             <p class="card-text">Genero: {{$peliculas->genero->nombre_genero}}</p>
-
-   
+            <p class="card-text">Actores:</p>
+                @foreach($peliculas->actores as $actores)
+                    <li><a href="../actores/{{$actores->id}}">{{$actores->nombre." ".$actores->apellido}}</a></li>
+                @endforeach
+            <br>
            <p class="card-text"><small class="text-muted">Año de estreno: {{$peliculas->anio}}</small></p>
    
         <!--Solo si el usuario esta logueado y es el creador  va a poder editar o eliminar-->

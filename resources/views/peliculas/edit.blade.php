@@ -39,7 +39,7 @@
         <br>
             {{ Form::label('genero', 'Genero:' )}}
             <select name="genero"   style="width: 100%">
-            <option value="{{$pelicula->director->id}}" selected >{{$pelicula->genero->nombre_genero}}</option>
+            <option value="{{$pelicula->genero->id}}" selected >{{$pelicula->genero->nombre_genero}}</option>
                 @foreach($generos as $genero)
                     <option value="{{$genero->id}}">{{ $genero->nombre_genero}}</option>
                 @endforeach
@@ -58,8 +58,8 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-4 file">
 
+            <div class="col-4 file">
                 {{Form::file('portada',$pelicula->portada)}}
             </div>
         </div>

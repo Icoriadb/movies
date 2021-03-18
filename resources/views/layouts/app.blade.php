@@ -39,6 +39,10 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="/directores">Directores</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/actores">Actores</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
