@@ -33,7 +33,11 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/peliculas">Todas las Peliculas</a>
+                            <a class="nav-link active" href="/peliculas">Películas</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/directores">Directores</a>
                         </li>
                     </ul>
 
