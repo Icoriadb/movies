@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Storage; //eliminar imagenes del servidor
 
 use Illuminate\Support\Arr;
 
-
-
 class PeliculasController extends Controller
 {
     /**
@@ -22,12 +20,18 @@ class PeliculasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //para acceder tiene que estar logueado menos en las paginas except
+     public function __construct() 
+     {
+         $this->middleware('auth', ["except" => ["index","show"]]);
+     }
+
+
     public function index()
     {
         //obtengo todas las peliculas
        $pelicula = Pelicula::all();
-
-
 
       //return  $actor->peliculas->first($pelicula)->pivot;
 
