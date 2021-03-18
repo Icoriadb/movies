@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Director;
+use App\Models\Pelicula;
+
 
 class DirectoresController extends Controller
 {
@@ -13,7 +16,9 @@ class DirectoresController extends Controller
      */
     public function index()
     {
-        //
+        $directores = Director::all();
+
+        return view('directores.index',["directores"=>$directores]);
     }
 
     /**
@@ -23,7 +28,8 @@ class DirectoresController extends Controller
      */
     public function create()
     {
-        //
+        return redirect('directores')->with('error', 'No se pueden crear nuevos directores');
+
     }
 
     /**
@@ -34,7 +40,8 @@ class DirectoresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect('directores')->with('error', 'No se pueden crear nuevos directores');
+
     }
 
     /**
@@ -45,7 +52,9 @@ class DirectoresController extends Controller
      */
     public function show($id)
     {
-        //
+        $director =Director::find($id);
+
+        return view("directores.show",["director"=>$director]);
     }
 
     /**
@@ -56,7 +65,8 @@ class DirectoresController extends Controller
      */
     public function edit($id)
     {
-        //
+        return redirect('directores')->with('error', 'No se pueden editar los directores');
+
     }
 
     /**
@@ -68,7 +78,8 @@ class DirectoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return redirect('directores')->with('error', 'No se pueden editar los directores');
+
     }
 
     /**
@@ -79,6 +90,7 @@ class DirectoresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return redirect('directores')->with('error', 'No se pueden eliminar los directores');
+
     }
 }
