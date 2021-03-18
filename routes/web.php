@@ -23,3 +23,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('peliculas','App\Http\Controllers\PeliculasController');
 Route::resource('directores','App\Http\Controllers\DirectoresController');
+Route::resource('actores','App\Http\Controllers\ActoresController');
