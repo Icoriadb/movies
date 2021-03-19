@@ -31,7 +31,7 @@ class PeliculasController extends Controller
     public function index()
     {
     //obtengo todas las peliculas
-    $pelicula = Pelicula::all();
+    $pelicula = Pelicula::paginate(6);
     
     return view("peliculas.index", ["peliculas"=>$pelicula]);
     }
