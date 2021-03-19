@@ -19,7 +19,7 @@ class User extends Authenticatable
 
     //un usuario una o muchas peliculas
     public function peliculas(){
-        $this->hasMany('\App\Models\User');
+       return  $this->hasMany('\App\Models\Pelicula');
     }
 
     protected $fillable = [
