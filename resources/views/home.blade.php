@@ -3,7 +3,7 @@
 
 @section('content')
 
-<h1>Mis Peliculas Cargadas</h1>
+<h1>Todas Mis Peliculas</h1>
 
 @if(count($peliculas) >0) <!--si tengo cargadas peliculas-->
 
