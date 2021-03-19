@@ -52,6 +52,7 @@ class ActoresController extends Controller
     public function show($id)
     {
         $actor = Actor::find($id);
+
         return view("actores.show",["actor"=>$actor]);
     }
 

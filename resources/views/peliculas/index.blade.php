@@ -28,6 +28,7 @@
         </div>
     </div>
     @endforeach
-
+@else
+    <h2>No hay peliculas cargadas</h2>    
 @endif
 @endsection

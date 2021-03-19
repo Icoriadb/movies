@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Director;
 use App\Models\Pelicula;
-
+use Illuminate\Support\Facades\DB;
 
 class DirectoresController extends Controller
 {
@@ -53,7 +53,6 @@ class DirectoresController extends Controller
     public function show($id)
     {
         $director =Director::find($id);
-
         return view("directores.show",["director"=>$director]);
     }
 
