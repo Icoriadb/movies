@@ -51,6 +51,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="/peliculas/create">Nueva Pelicula</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/home">Mis Peliculas</a>
+                        </li>
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
