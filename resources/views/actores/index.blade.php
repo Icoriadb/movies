@@ -1,10 +1,4 @@
 @extends('layouts.app') 
-
-<style>
-    h1{
-        text-align:center;
-    }
-</style>
 @section('content')
 
 <h1>Actores</h1>

@@ -1,13 +1,5 @@
 @extends('layouts.app') 
 
-<style>
-    h1{
-        text-align:center;
-    }
-    h2{
-        padding:5px;
-    }
-</style>
 @section('content')
 
 <h1>Directores</h1>

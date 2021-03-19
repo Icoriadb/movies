@@ -1,11 +1,5 @@
 @extends('layouts.app') <!--importo el layout-->
 
-<style>
-.file{
-    margin-top:7.5%;
-}
-
-</style>
 @section('content')
 
 

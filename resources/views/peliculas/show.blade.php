@@ -1,8 +1,5 @@
 @extends('layouts.app') <!--importo el layout-->
 
-<style>
-  
-</style>
 @section('content')
 
 <h1>Pelicula:</h1>
