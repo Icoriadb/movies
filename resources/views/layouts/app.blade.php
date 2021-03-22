@@ -92,6 +92,8 @@
         </nav>
 
         <main class="py-4 container">
+        
+       
         @include('inc.mensajes') <!--mensajes-->    
             @yield('content')
             

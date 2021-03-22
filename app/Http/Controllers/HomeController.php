@@ -36,4 +36,7 @@ class HomeController extends Controller
         return view('home', ["peliculas"=> $user->peliculas]);
      
     }
+
+  
+
 }
