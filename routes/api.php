@@ -19,4 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('actores',[App\Http\Controllers\ApiActoresController::class,'getListaActores']);
-Route::get('pelicula',[App\Http\Controllers\ApiActoresController::class,'getPeliculaAleatoria']);
+Route::get('pelicula',[App\Http\Controllers\ApiPeliculasController::class,'getPeliculaAleatoria']);
