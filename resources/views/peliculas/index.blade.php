@@ -11,7 +11,7 @@
 
     @foreach($peliculas as $pelicula)
     
-    <div class="col">
+    <div class="col mt-3">
         <div class="card h-100">
             <img src="/storage/portadas/{{$pelicula->imagen_portada}}" class=" img-thumbnail" alt="imagen pelicula">
             <div class="card-body">

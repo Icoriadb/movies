@@ -6,7 +6,7 @@
 
 <div class="row row-cols-1 row-cols-md-3 g-4 ">
 
-    <div class="col align-self-center">
+    <div class="col align-self-center ">
         <div class="card h-100">
             <img src="/storage/portadas/{{$peliculas->imagen_portada}}" class=" img-thumbnail" alt="imagen pelicula">
         <div class="card-body">
